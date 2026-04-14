@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFS Test – Search (kw param)</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/search?kw=marketing" class="active">Search (kw)</a>
+    <a href="/search-force">Search (forced)</a>
+    <a href="/listing">Listing</a>
+    <a href="/detail">Detail</a>
+  </nav>
+
+  <h1>🔍 Search Page (kw param)</h1>
+  <div class="meta">
+    <div><strong>Page Type:</strong> Search (dynamic query from URL)</div>
+    <div><strong>Route:</strong> /search?kw=…</div>
+    <div><strong>Query sent to AFS:</strong> <span class="query-value" id="current-query">—</span></div>
+  </div>
+
+  <div id="afscontainer1"></div>
+
+  <details class="debug-section" open>
+    <summary>Debug Log</summary>
+    <pre id="debug-log"></pre>
+  </details>
+
+  <script src="/shared.js"></script>
+  <script>
+    (function() {
+      var query = getUrlParam("kw") || "marketing";
+      log("Page: Search (kw param) | query = " + query);
+
+      runAFS(query, {
+        resultsPageQueryParam: "kw"
+      });
+    })();
+  </script>
+</body>
+</html>

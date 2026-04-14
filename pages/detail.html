@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Business Conference 2026</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/search?kw=marketing">Search (kw)</a>
+    <a href="/search-force">Search (forced)</a>
+    <a href="/listing">Listing</a>
+    <a href="/detail" class="active">Detail</a>
+  </nav>
+
+  <h1>📄 Detail Page</h1>
+  <div class="meta">
+    <div><strong>Page Type:</strong> Detail (uses document.title as query)</div>
+    <div><strong>Route:</strong> /detail</div>
+    <div><strong>document.title:</strong> <em id="page-title-display"></em></div>
+    <div><strong>Query sent to AFS:</strong> <span class="query-value" id="current-query">—</span></div>
+  </div>
+
+  <div id="afscontainer1"></div>
+
+  <details class="debug-section" open>
+    <summary>Debug Log</summary>
+    <pre id="debug-log"></pre>
+  </details>
+
+  <script src="/shared.js"></script>
+  <script>
+    (function() {
+      var query = document.title;
+      document.getElementById("page-title-display").textContent = query;
+      log("Page: Detail | query (from document.title) = " + query);
+
+      // No resultsPageQueryParam for detail pages
+      runAFS(query, {});
+    })();
+  </script>
+</body>
+</html>

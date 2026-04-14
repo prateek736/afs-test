@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFS Test – Search (Forced Query)</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/search?kw=marketing">Search (kw)</a>
+    <a href="/search-force" class="active">Search (forced)</a>
+    <a href="/listing">Listing</a>
+    <a href="/detail">Detail</a>
+  </nav>
+
+  <h1>🎯 Search Page (Forced Query)</h1>
+  <div class="meta">
+    <div><strong>Page Type:</strong> Search (fixed query, ignores URL)</div>
+    <div><strong>Route:</strong> /search-force</div>
+    <div><strong>Query sent to AFS:</strong> <span class="query-value" id="current-query">—</span></div>
+  </div>
+
+  <div id="afscontainer1"></div>
+
+  <details class="debug-section" open>
+    <summary>Debug Log</summary>
+    <pre id="debug-log"></pre>
+  </details>
+
+  <script src="/shared.js"></script>
+  <script>
+    (function() {
+      var query = "buy shoes online";
+      log("Page: Search (forced) | query = " + query);
+
+      runAFS(query, {
+        resultsPageQueryParam: "kw"
+      });
+    })();
+  </script>
+</body>
+</html>

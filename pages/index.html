@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFS Test Suite – adtest.10times.com</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+    .card {
+      background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+      padding: 20px; text-decoration: none; color: inherit;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .card h2 { font-size: 16px; margin-bottom: 6px; color: #1a73e8; }
+    .card p { font-size: 13px; color: #555; line-height: 1.5; }
+    .card code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+    .header-info { margin-top: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+    .header-info code { background: #e8f0fe; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>🧪 AFS Test Suite</h1>
+  <p style="color:#555; font-size: 14px;">Google AdSense for Search — ad fill & eligibility testing</p>
+
+  <div class="header-info">
+    <div><strong>Publisher:</strong> <code>pub-8525015516580200</code></div>
+    <div><strong>Style ID:</strong> <code>4287184448</code></div>
+    <div><strong>Ad Test Mode:</strong> <code>on</code></div>
+  </div>
+
+  <div class="card-grid">
+    <a class="card" href="/search?kw=marketing">
+      <h2>🔍 Search Page (kw param)</h2>
+      <p>Reads query from <code>?kw=</code> URL parameter. Tests standard search page ad eligibility.</p>
+      <p style="margin-top: 8px;"><code>/search?kw=marketing</code></p>
+    </a>
+
+    <a class="card" href="/search-force">
+      <h2>🎯 Search Page (Forced Query)</h2>
+      <p>Ignores URL, uses fixed query <code>"buy shoes online"</code>. Tests forced query behavior.</p>
+      <p style="margin-top: 8px;"><code>/search-force</code></p>
+    </a>
+
+    <a class="card" href="/listing">
+      <h2>📋 Listing Page</h2>
+      <p>Uses query <code>"business events"</code>, no <code>resultsPageQueryParam</code>. Tests non-search page eligibility.</p>
+      <p style="margin-top: 8px;"><code>/listing</code></p>
+    </a>
+
+    <a class="card" href="/detail">
+      <h2>📄 Detail Page</h2>
+      <p>Uses <code>document.title</code> as query, no search param. Tests detail page ad fill.</p>
+      <p style="margin-top: 8px;"><code>/detail</code></p>
+    </a>
+  </div>
+</body>
+</html>

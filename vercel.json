@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/search", "destination": "/pages/search.html" },
+    { "source": "/search-force", "destination": "/pages/search-force.html" },
+    { "source": "/listing", "destination": "/pages/listing.html" },
+    { "source": "/detail", "destination": "/pages/detail.html" },
+    { "source": "/", "destination": "/pages/index.html" }
+  ]
+}

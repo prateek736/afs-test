@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #fafafa;
+  color: #222;
+}
+
+h1 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.meta {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.meta strong {
+  color: #111;
+}
+
+.meta .query-value {
+  background: #e8f0fe;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+#afscontainer1 {
+  min-height: 120px;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  margin-top: 16px;
+  background: #fff;
+}
+
+.debug-section {
+  margin-top: 24px;
+}
+
+.debug-section summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+#debug-log {
+  margin-top: 8px;
+  padding: 12px;
+  background: #1e1e1e;
+  color: #0f0;
+  font-family: "Cascadia Code", "Consolas", monospace;
+  font-size: 12px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+nav {
+  margin-bottom: 24px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+nav a {
+  display: inline-block;
+  margin-right: 16px;
+  font-size: 14px;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav a.active {
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFS Test – Listing Page</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/search?kw=marketing">Search (kw)</a>
+    <a href="/search-force">Search (forced)</a>
+    <a href="/listing" class="active">Listing</a>
+    <a href="/detail">Detail</a>
+  </nav>
+
+  <h1>📋 Listing Page</h1>
+  <div class="meta">
+    <div><strong>Page Type:</strong> Listing (no search param)</div>
+    <div><strong>Route:</strong> /listing</div>
+    <div><strong>Query sent to AFS:</strong> <span class="query-value" id="current-query">—</span></div>
+  </div>
+
+  <div id="afscontainer1"></div>
+
+  <details class="debug-section" open>
+    <summary>Debug Log</summary>
+    <pre id="debug-log"></pre>
+  </details>
+
+  <script src="/shared.js"></script>
+  <script>
+    (function() {
+      var query = "business events";
+      log("Page: Listing | query = " + query);
+
+      // No resultsPageQueryParam for listing pages
+      runAFS(query, {});
+    })();
+  </script>
+</body>
+</html>
