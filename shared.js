@@ -82,7 +82,7 @@ function runAFS(query, extraPageOptions) {
     {
       pubId: AFS_CONFIG.pubId,
       query: query,
-      adtest: AFS_CONFIG.adtest,
+
       adsafe: "high",
       hl: "en",
       channel: "afs-test",
