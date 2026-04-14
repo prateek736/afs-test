@@ -9,7 +9,6 @@ const AFS_CONFIG = {
   containerId: "afscontainer1",
   scriptSrc: "https://www.google.com/adsense/search/ads.js",
   adNumber: 2,
-  adtest: "on",
 };
 
 let scriptLoaded = false;
@@ -82,10 +81,7 @@ function runAFS(query, extraPageOptions) {
     {
       pubId: AFS_CONFIG.pubId,
       query: query,
-
-      adsafe: "high",
       hl: "en",
-      channel: "afs-test",
       adLoadedCallback: function (containerName, adsLoaded) {
         log(
           "adsLoadedCallback → container: " +
