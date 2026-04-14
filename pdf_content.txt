@@ -1,0 +1,234 @@
+--- PAGE 1 ---
+Detail Page 
+ 
+{% if data.detailes.data.event.event_membership|default(0) < 1  
+   and data.detailes.data.event.organizer is defined 
+   and data.detailes.data.event.organizer[0].membership|default(0) < 1 %} 
+ 
+    <!-- AFS Ad Container --> 
+    <div id="afscontainer1" class="my-3 box"></div> 
+ 
+    <!-- Related Searches (fallback) --> 
+    <div id="relatedsearches1" class="my-3 box" style="display:none;"></div> 
+ 
+     
+    {# Extract category #} 
+    {% set cat_name_ad = "" %} 
+    {% if data.detailes.data.category_all is defined and data.detailes.data.category_all is not 
+empty %} 
+        {% for value in data.detailes.data.category_all %} 
+            {% if value.isGroup == 1 and value.industry_name is defined and cat_name_ad == "" %} 
+                {% set cat_name_ad = value.industry_name %} 
+            {% endif %} 
+        {% endfor %} 
+    {% endif %} 
+ 
+    <!-- Hidden inputs --> 
+<input type="hidden" id="cat_name_ad" value="{{ cat_name_ad }}" /> 
+<input type="hidden" id="countryName" value="{{ data.detailes.data.event.country }}" /> 
+<input type="hidden" id="event_audience" value="{{ data.detailes.data.event.event_audience }}" 
+/> 
+<input type="hidden" id="event_format" value="{{ data.detailes.data.event.format }}" /> 
+ 
+ 
+{% endif %} 
+ 
+ 
+Listing Page 
+✅ 1. TWIG CHANGES (LISTING PAGE) 
+Hidden inputs (same as before) 
+<input type="hidden" id="is_search_page" value="1" /> 
+<input type="hidden" id="search_phrase" value="{{ search_phrase ?? '' }}" /> 
+ 
+
+--- PAGE 2 ---
+ 
+ 
+👉 Place AFS inside the same slot where GAM renders 
+<div class="right-rail-ad"> 
+ 
+   {# AFS will try to take over this slot #} 
+   <div id="afscontainer1"></div> 
+ 
+   {# Related searches (used only on detail pages) #} 
+   <div id="relatedsearches1" style="display:none;"></div> 
+ 
+   <div id="afs_fallback" style="display:none;"></div> 
+ 
+</div> 
+👉 Your GAM (via GPT / Ad Manager) should already be rendering in this same area. 
+✅ 2. CSS (VERY IMPORTANT) 
+<style> 
+#afscontainer1 { 
+   min-height: 250px; 
+} 
+</style>
+ 
+ 
+ 
+====================================================== 
+ 
+ 
+JS 
+function loadAFSScript() { 
+ 
+    const adContainer = document.getElementById("afscontainer1"); 
+    if (!adContainer) return; 
+ 
+    if (window.afsLoaded) return; 
+    window.afsLoaded = true; 
+ 
+    (function(g,o){ 
+        g[o]=g[o]||function(){(g[o]['q']=g[o]['q']||[]).push(arguments)}; 
+
+--- PAGE 3 ---
+        g[o]['t']=1*new Date; 
+    })(window,'_googCsa'); 
+ 
+    var script = document.createElement("script"); 
+    script.src = "https://www.google.com/adsense/search/ads.js"; 
+    script.async = true; 
+ 
+    script.onload = function () { 
+        runAFSAds(false); 
+    }; 
+ 
+    document.head.appendChild(script); 
+} 
+ 
+ 
+// 🧠 UNIVERSAL QUERY BUILDER 
+function buildAFSQuery(isRetry = false) { 
+ 
+    let category = document.getElementById("cat_name_ad")?.value?.trim() || ""; 
+    let country = document.getElementById("countryName")?.value?.trim() || ""; 
+    let audience = document.getElementById("event_audience")?.value || ""; 
+    let format = document.getElementById("event_format")?.value || ""; 
+ 
+    let isSearchPage = document.getElementById("is_search_page")?.value == "1"; 
+    let searchPhrase = document.getElementById("search_phrase")?.value?.trim() || ""; 
+ 
+    // 🟢 RETRY LOGIC (broad fallback) 
+    if (isRetry) { 
+        if (isSearchPage && searchPhrase) { 
+            return searchPhrase; // retry without forcing "events" 
+        } 
+        return "business events"; 
+    } 
+ 
+    // 🟢 LISTING PAGE LOGIC 
+    if (isSearchPage) { 
+ 
+        let phrase = searchPhrase; 
+ 
+        // fallback to H1 if no search phrase 
+        if (!phrase) { 
+            let h1 = document.querySelector("h1")?.innerText?.trim() || ""; 
+            phrase = h1; 
+        } 
+
+--- PAGE 4 ---
+ 
+        if (!phrase) return "business events"; 
+ 
+        let lower = phrase.toLowerCase(); 
+ 
+        // append "events" if missing 
+        if (!/(^|\s)(event|events)(\s|$)/i.test(lower)) { 
+            phrase += " events"; 
+        } 
+ 
+        return phrase; 
+    } 
+ 
+    // 🟡 DETAIL PAGE LOGIC 
+ 
+    let noun = "business events"; 
+ 
+    if (audience === "11000") { 
+        if (format == "1") { 
+            noun = "trade shows"; 
+        } else if (format == "2") { 
+            noun = "conferences"; 
+        } 
+    } else if (audience === "10100") { 
+        noun = "events"; 
+    } 
+ 
+    let parts = []; 
+ 
+    if (category) parts.push(category); 
+    parts.push(noun); 
+    if (country) parts.push(country); 
+ 
+    return parts.join(" ").trim() || "business events"; 
+} 
+ 
+ 
+// 🚀 RUN ADS 
+function runAFSAds(isRetry = false) { 
+ 
+    let query = buildAFSQuery(isRetry); 
+ 
+    var pageOptions = { 
+        pubId: "partner-pub-8525015516580200", 
+
+--- PAGE 5 ---
+        query: query, 
+        styleId: "4287184448", 
+        adsafe: "medium" 
+    }; 
+ 
+    var adblock1 = { 
+        container: "afscontainer1", 
+        number: 2 
+    }; 
+ 
+    var rsblock1 = { 
+        container: "relatedsearches1", 
+        relatedSearches: 10 
+    }; 
+ 
+    _googCsa('ads', pageOptions, adblock1, rsblock1); 
+ 
+    setTimeout(() => checkAFSFill(isRetry), 1800); 
+} 
+ 
+ 
+// 🔍 CHECK FILL + RETRY + FALLBACK 
+function checkAFSFill(isRetry) { 
+ 
+    const adContainer = document.getElementById("afscontainer1"); 
+    const relatedContainer = document.getElementById("relatedsearches1"); 
+    const fallback = document.getElementById("afs_fallback"); 
+ 
+    if (!adContainer) return; 
+ 
+    const hasAds = adContainer.querySelector("iframe"); 
+ 
+    if (hasAds) { 
+        if (relatedContainer) relatedContainer.style.display = "none"; 
+        if (fallback) fallback.style.display = "none"; 
+        return; 
+    } 
+ 
+    // 🔁 Retry once 
+    if (!isRetry) { 
+        console.log("AFS retry triggered"); 
+        runAFSAds(true); 
+        return; 
+    } 
+
+--- PAGE 6 ---
+ 
+    // ❌ Final fallback 
+    console.log("AFS fallback triggered"); 
+ 
+    if (relatedContainer) relatedContainer.style.display = "block"; 
+    if (fallback) fallback.style.display = "block"; 
+ 
+    adContainer.style.display = "none"; 
+} 
+ 
+ 
+ 

@@ -21,6 +21,9 @@ const ROUTES = {
   "/search-force": "search-force.html",
   "/listing": "listing.html",
   "/detail": "detail.html",
+  "/guide-search": "guide-search.html",
+  "/guide-detail": "guide-detail.html",
+  "/guide-detail-nocategory": "guide-detail-nocategory.html",
 };
 
 function serveFile(filePath, res) {
@@ -42,9 +45,12 @@ const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
   const pathname = url.pathname;
 
-  // Serve static files (shared.js, style.css) from root
+  // Serve static files from root
   if (pathname === "/shared.js") {
     return serveFile(path.join(__dirname, "shared.js"), res);
+  }
+  if (pathname === "/afs.js") {
+    return serveFile(path.join(__dirname, "afs.js"), res);
   }
   if (pathname === "/style.css") {
     return serveFile(path.join(__dirname, "style.css"), res);

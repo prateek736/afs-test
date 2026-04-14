@@ -4,6 +4,9 @@
     { "source": "/search-force", "destination": "/pages/search-force.html" },
     { "source": "/listing", "destination": "/pages/listing.html" },
     { "source": "/detail", "destination": "/pages/detail.html" },
+    { "source": "/guide-search", "destination": "/pages/guide-search.html" },
+    { "source": "/guide-detail", "destination": "/pages/guide-detail.html" },
+    { "source": "/guide-detail-nocategory", "destination": "/pages/guide-detail-nocategory.html" },
     { "source": "/", "destination": "/pages/index.html" }
   ]
 }
